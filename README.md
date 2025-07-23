@@ -159,11 +159,17 @@ docker compose exec app php artisan migrate --seed
 > После успешного выполнения миграций и заполнения данных, у всех пользователей (авторов и администраторов) будет один и тот-же пароль = `password`.
 ### Данные для входа администратора:
 ```json
-{ "email": "admin@example.com", "password": "password" }
+{ 
+    "email": "admin@example.com", 
+    "password": "password"
+}
 ```
 ### Данные для входа автора:
 ```json
-{ "email": "Почта_автора", "password": "password" }
+{ 
+    "email": "Почта_автора", 
+    "password": "password"
+}
 ```
 ### Данные для создания и обновления книг:
 ```json

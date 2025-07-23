@@ -7,10 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Author;
 use App\Models\Book;
 use App\Models\Genre;
-use App\Services\ExceptionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
 
 class BookController extends Controller
 {
@@ -33,7 +31,7 @@ class BookController extends Controller
 
     public function index(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'title' => 'sometimes|string|max:255',
             'author' => 'sometimes|string',
             'genres' => 'sometimes|string',

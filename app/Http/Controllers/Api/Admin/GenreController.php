@@ -4,10 +4,8 @@ namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Genre;
-use App\Services\ExceptionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
 
 class GenreController extends Controller
 {
@@ -21,19 +19,15 @@ class GenreController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $validated = $request->validate([
-                'name' => 'required|string|max:255|unique:genres',
-            ]);
+        $validated = $request->validate([
+            'name' => 'required|string|max:255|unique:genres',
+        ]);
 
-            $genre = Genre::create($validated);
+        $genre = Genre::create($validated);
 
-            Log::channel('library')->info("Genre {$genre->id} created by admin");
+        Log::channel('library')->info("Genre {$genre->id} created by admin");
 
-            return response()->json($genre, 201);
-        } catch (ValidationException $e){
-            return ExceptionService::respondWithValidationError($e->validator->errors()->first());
-        }
+        return response()->json($genre, 201);
     }
 
     public function show(Genre $genre)
@@ -43,19 +37,15 @@ class GenreController extends Controller
 
     public function update(Request $request, Genre $genre)
     {
-        try {
-            $validated = $request->validate([
-                'name' => 'sometimes|string|max:255|unique:genres,name,'.$genre->id,
-            ]);
+        $validated = $request->validate([
+            'name' => 'sometimes|string|max:255|unique:genres,name,'.$genre->id,
+        ]);
 
-            $genre->update($validated);
+        $genre->update($validated);
 
-            Log::channel('library')->info("Genre {$genre->id} updated by admin");
+        Log::channel('library')->info("Genre {$genre->id} updated by admin");
 
-            return response()->json($genre);
-        } catch (ValidationException $e){
-            return ExceptionService::respondWithValidationError($e->validator->errors()->first());
-        }
+        return response()->json($genre);
     }
 
     public function destroy(Genre $genre)

@@ -5,11 +5,9 @@ namespace App\Http\Controllers\Api\Author;
 use App\Enums\BookType;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
-use App\Services\ExceptionService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\ValidationException;
 
 class BookController extends Controller
 {
