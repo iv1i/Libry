@@ -61,6 +61,10 @@ class BookController extends Controller
 
         $books = $query->paginate($request->input('per_page', 15));
 
+        if ($books->isEmpty()) {
+            abort(404);
+        }
+
         Log::channel('library')->info("The admin requested books");
 
         return response()->json($books);

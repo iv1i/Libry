@@ -14,6 +14,10 @@ class GenreController extends Controller
         $genres = Genre::withCount('books')
             ->paginate($request->input('per_page', 15));
 
+        if ($genres->isEmpty()) {
+            abort(404);
+        }
+
         return response()->json($genres);
     }
 

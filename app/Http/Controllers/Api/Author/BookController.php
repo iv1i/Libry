@@ -22,6 +22,11 @@ class BookController extends Controller
             ->with('genres')
             ->paginate($request->input('per_page', 15));
         $authorId = Auth::guard('author')->user()->id;
+
+        if ($books->isEmpty()) {
+            abort(404);
+        }
+
         Log::channel('library')->info("The author {$authorId} requested books");
 
         return response()->json($books);

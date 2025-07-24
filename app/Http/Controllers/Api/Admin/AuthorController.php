@@ -16,6 +16,10 @@ class AuthorController extends Controller
         $authors = Author::withCount('books')
             ->paginate($request->input('per_page', 15));
 
+        if ($authors->isEmpty()) {
+            abort(404);
+        }
+
         return response()->json($authors);
     }
 
