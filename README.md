@@ -4,10 +4,10 @@
 
 ### <p align="center">Минималистичный REST API для управления библиотекой</p>
 
-## <img src="public/docs/icons/link.png" width="35" style="vertical-align: middle;"> Ссылки
+## <img src="public/docs/icons/link.png" width="35" align="absmiddle"> Ссылки
 ### [Технологии](#technologies) | [Описание](#description) | [Маршруты](#routes) | [Инициализация](#init) | [Взаимодействие](#interaction)
 
-## <img src="public/docs/icons/tools.png" width="35" style="vertical-align: middle;"> Используемые технологии <a id='technologies'></a>[<img src="public/docs/icons/up.png" width="20" style="vertical-align: middle;">](#links)
+## <img src="public/docs/icons/tools.png" width="35" align="absmiddle"> Используемые технологии <a id='technologies'></a>[<img src="public/docs/icons/up.png" width="20" align="absmiddle">](#links)
 
 [PHP 8.2](https://www.php.net/) - Язык программироваия.
 
@@ -21,7 +21,7 @@
 
 [Laravel Sanctum](https://laravel.su/docs/12.x/sanctum) - Cистема аутентификации.
 
-## <img src="public/docs/icons/book2.png" width="35" style="vertical-align: middle;"> Описание <a id='description'></a>[<img src="public/docs/icons/up.png" width="20" style="vertical-align: middle;">](#links)
+## <img src="public/docs/icons/book2.png" width="35" align="absmiddle"> Описание <a id='description'></a>[<img src="public/docs/icons/up.png" width="20" align="absmiddle">](#links)
 
 Проект представляет собой RESTful API для управления библиотекой с тремя типами пользователей: гости, авторы и администраторы.
 
@@ -43,7 +43,7 @@
 - **Пагинация** для всех списков
 - **Фильтрация** и **сортировка** для книг
 
-## <img src="public/docs/icons/route.png" width="35" style="vertical-align: middle;"> Маршруты <a id='routes'></a>[<img src="public/docs/icons/up.png" width="20" style="vertical-align: middle;">](#links)
+## <img src="public/docs/icons/route.png" width="35" align="absmiddle"> Маршруты <a id='routes'></a>[<img src="public/docs/icons/up.png" width="20" align="absmiddle">](#links)
 
 ### Публичные маршруты (без аутентификации)
 
@@ -109,7 +109,7 @@
 | PUT   | `/api/admin/genres/{genre}` | Обновить данные жанра           |
 | DELETE| `/api/admin/genres/{genre}` | Удалить жанр                    |
 
-## <img src="public/docs/icons/rocket.png" width="30" style="vertical-align: middle;"> Инициализация <a id='init'></a>[<img src="public/docs/icons/up.png" width="20" style="vertical-align: middle;">](#links)
+## <img src="public/docs/icons/rocket.png" width="30" align="absmiddle"> Инициализация <a id='init'></a>[<img src="public/docs/icons/up.png" width="20" align="absmiddle">](#links)
 > [!NOTE]
 > Рекомендуется использовать DNS 8.8.8.8 для избежания проблем с контейнерами.
 ### Предварительные требования
@@ -156,7 +156,7 @@ docker compose exec app php artisan migrate --seed
 ### После успешного запуска система будет доступна по адресу: 
 ### `http://localhost`
 
-## <img src="public/docs/icons/fire.png" width="35" style="vertical-align: middle;"> Взаимодействие с системой  <a id='interaction'></a>[<img src="public/docs/icons/up.png" width="20" style="vertical-align: middle;">](#links)
+## <img src="public/docs/icons/fire.png" width="35" align="absmiddle"> Взаимодействие с системой  <a id='interaction'></a>[<img src="public/docs/icons/up.png" width="20" align="absmiddle">](#links)
 > [!NOTE]
 > После успешного выполнения миграций и заполнения данных, у всех пользователей (авторов и администраторов) будет один и тот-же пароль = `password`.
 ### Данные для входа администратора:
