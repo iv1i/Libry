@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
+use App\Observers\BookObserver;
+use Illuminate\Database\Eloquent\Concerns\HasEvents;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
     use HasFactory;
-
+    use HasEvents;
     protected $fillable = ['title', 'description', 'author_id', 'type'];
 
     public function author()

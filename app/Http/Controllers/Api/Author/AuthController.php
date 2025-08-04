@@ -3,42 +3,22 @@
 namespace App\Http\Controllers\Api\Author;
 
 use App\Http\Controllers\Controller;
-use App\Models\Author;
+use App\Http\Requests\Author\AuthorAuthRequest;
+use App\Services\AuthorService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
-    public function login(Request $request)
+    public function login(AuthorAuthRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
-
-        $author = Author::where('email', $request->email)->first();
-
-        if (!$author || !Hash::check($request->password, $author->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
-        }
-
-        $token = $author->createToken('author-token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'Logged in successfully',
-            'token' => $token,
-            'author' => $author
-        ]);
+        $res = AuthorService::login($request);
+        return response()->json($res);
     }
 
     public function logout(Request $request)
     {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json(['message' => 'Logged out successfully']);
+        $res = AuthorService::logout($request);
+        return response()->json($res);
     }
 
 }

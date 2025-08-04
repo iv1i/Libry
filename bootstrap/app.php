@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -36,5 +37,10 @@ return Application::configure(basePath: dirname(__DIR__))
             return response()->json([
                 'error' => $e->validator->errors()->first()
             ], 422);
+        });
+        $exceptions->render(function (QueryException $e, Request $request) {
+            return response()->json([
+                'error' => 'Table not found.'
+            ], 404);
         });
     })->create();

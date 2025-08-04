@@ -3,73 +3,41 @@
 namespace App\Http\Controllers\Api\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AdminAuthorStoreRequest;
+use App\Http\Requests\Admin\AdminAuthorUpdateRequest;
+use App\Http\Requests\Admin\AdminBookIndexRequest;
 use App\Models\Author;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Validation\Rules\Password;
+use App\Services\Admin\AuthorService;
 
 class AuthorController extends Controller
 {
-    public function index(Request $request)
+    public function index(AdminBookIndexRequest $request)
     {
-        $authors = Author::withCount('books')
-            ->paginate($request->input('per_page', 15));
-
-        if ($authors->isEmpty()) {
-            abort(404);
-        }
-
-        return response()->json($authors);
+        $res = AuthorService::index($request);
+        return response()->json($res);
     }
 
-    public function store(Request $request)
+    public function store(AdminAuthorStoreRequest $request)
     {
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:authors',
-            'password' => ['required', Password::defaults()],
-        ]);
-
-        $validated['password'] = Hash::make($validated['password']);
-
-        $author = Author::create($validated);
-
-        Log::channel('library')->info("Author {$author->id} created by admin");
-
-        return response()->json($author, 201);
+        $res = AuthorService::store($request);
+        return response()->json($res);
     }
 
     public function show(Author $author)
     {
-        return response()->json($author->load('books'));
+        $res = AuthorService::show($author);
+        return response()->json($res);
     }
 
-    public function update(Request $request, Author $author)
+    public function update(AdminAuthorUpdateRequest $request, Author $author)
     {
-        $validated = $request->validate([
-            'name' => 'sometimes|string|max:255',
-            'email' => 'sometimes|email|unique:authors,email,'.$author->id,
-            'password' => ['sometimes', Password::defaults()],
-        ]);
-
-        if (isset($validated['password'])) {
-            $validated['password'] = Hash::make($validated['password']);
-        }
-
-        $author->update($validated);
-
-        Log::channel('library')->info("Author {$author->id} updated by admin");
-
-        return response()->json($author);
+        $res = AuthorService::update($request, $author);
+        return response()->json($res);
     }
 
     public function destroy(Author $author)
     {
-        $author->delete();
-
-        Log::channel('library')->info("Author {$author->id} deleted by admin");
-
-        return response()->json(['message' => 'Author deleted']);
+        $res = AuthorService::destroy($author);
+        return response()->json($res);
     }
 }
