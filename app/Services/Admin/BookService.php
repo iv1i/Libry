@@ -37,7 +37,7 @@ class BookService
             $query->orderBy('title');
         }
 
-        $books = $query->paginate($request->input('per_page', 15));
+        $books = $query->paginate();
 
         if ($books->isEmpty()) {
             abort(404);
@@ -49,7 +49,7 @@ class BookService
     {
         return $book->load('author', 'genres');
     }
-    public static function store(AdminBookStoreRequest $request)
+    public static function store(AdminBookStoreRequest $request): Book
     {
         $bookId = Utility::makeId(Book::all());
         $author = Author::where('name', $request->validated()['author'])->first();
@@ -81,6 +81,6 @@ class BookService
     public static function destroy(Book $book): array
     {
         $book->delete();
-        return ['message' => "Book deleted"];
+        return ['message' => "Book {$book->title} (ID: {$book->id}) deleted"];
     }
 }

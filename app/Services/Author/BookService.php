@@ -4,12 +4,13 @@ namespace App\Services\Author;
 
 use App\Http\Requests\Author\AuthorBookUpdateRequest;
 use App\Models\Book;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BookService
 {
-    public static function index(Request $request)
+    public static function index(Request $request): Book|JsonResponse
     {
         if (!Auth::guard('author')->check()) {
             return response()->json([
@@ -18,7 +19,7 @@ class BookService
         }
         $books = Auth::guard('author')->user()->books()
             ->with('genres')
-            ->paginate($request->input('per_page', 15));
+            ->paginate();
 
         if ($books->isEmpty()) {
             abort(404);
@@ -27,7 +28,7 @@ class BookService
         return $books;
     }
 
-    public static function update(AuthorBookUpdateRequest $request, Book $book)
+    public static function update(AuthorBookUpdateRequest $request, Book $book): Book|JsonResponse
     {
         if ($book->author_id !== Auth::guard('author')->id()) {
             return response()->json([
@@ -44,7 +45,7 @@ class BookService
         return $book->load('genres');
     }
 
-    public static function destroy(Book $book)
+    public static function destroy(Book $book): array|JsonResponse
     {
         if ($book->author_id !== Auth::guard('author')->id()) {
             return response()->json([
@@ -54,6 +55,6 @@ class BookService
 
         $book->delete();
 
-        return ['message' => 'Book deleted'];
+        return ['message' => "Book {$book->title} (ID: {$book->id}) deleted"];
     }
 }

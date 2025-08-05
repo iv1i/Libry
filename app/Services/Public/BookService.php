@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class BookService
 {
-    public static function index(Request $request)
+    public static function index(Request $request): \Illuminate\Pagination\LengthAwarePaginator
     {
         $books = Book::with('author')
-            ->paginate($request->input('per_page', 15));
+            ->paginate();
 
         if ($books->isEmpty()) {
             abort(404);
@@ -19,7 +19,7 @@ class BookService
         return $books;
     }
 
-    public static function show(Book $book)
+    public static function show(Book $book): Book
     {
         return $book->load('author', 'genres');
     }

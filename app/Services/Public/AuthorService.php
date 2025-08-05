@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 
 class AuthorService
 {
-    public static function index(Request $request)
+    public static function index(Request $request): Author
     {
         $authors = Author::withCount('books')
-            ->paginate($request->input('per_page', 15));
+            ->paginate();
 
         if ($authors->isEmpty()) {
             abort(404);
@@ -19,7 +19,7 @@ class AuthorService
         return $authors;
     }
 
-    public static function show(Author $author)
+    public static function show(Author $author): Author
     {
         return $author->load('books');
     }

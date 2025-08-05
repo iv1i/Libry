@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthorService
 {
-    public static function index(Request $request)
+    public static function index(Request $request): Author
     {
         $authors = Author::withCount('books')
             ->paginate($request->input('per_page', 15));
@@ -22,19 +22,19 @@ class AuthorService
         return $authors;
     }
 
-    public static function store(AdminAuthorStoreRequest $request)
+    public static function store(AdminAuthorStoreRequest $request): Author
     {
         $request->validated()['password'] = Hash::make($request->validated()['password']);
 
         return Author::create($request->validated());
     }
 
-    public static function show(Author $author)
+    public static function show(Author $author): Author
     {
         return $author->load('books');
     }
 
-    public static function update(AdminAuthorUpdateRequest $request, Author $author)
+    public static function update(AdminAuthorUpdateRequest $request, Author $author): Author
     {
         if (isset($request->validated()['password'])) {
             $request->validated()['password'] = Hash::make($request->validated()['password']);
@@ -45,9 +45,9 @@ class AuthorService
         return $author;
     }
 
-    public static function destroy(Author $author)
+    public static function destroy(Author $author): array
     {
         $author->delete();
-        return ['message' => 'Author deleted'];
+        return ['message' => "Author {$author->name} (ID: {$author->id}) deleted"];
     }
 }

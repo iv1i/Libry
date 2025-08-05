@@ -11,7 +11,7 @@ use Illuminate\Validation\ValidationException;
 
 class AdminService
 {
-    public static function login(AdminAuthRequest $request)
+    public static function login(AdminAuthRequest $request): array
     {
         $admin = Admin::where('email', $request->email)->first();
 
@@ -30,7 +30,7 @@ class AdminService
         ];
     }
 
-    public static function logout(Request $request)
+    public static function logout(Request $request): array
     {
         $request->user()->currentAccessToken()->delete();
         return ['message' => 'Logged out successfully'];

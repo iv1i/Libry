@@ -10,7 +10,7 @@ use Illuminate\Validation\ValidationException;
 
 class AuthorService
 {
-    public function login(AuthorAuthRequest $request)
+    public static function login(AuthorAuthRequest $request): array
     {
         $author = Author::where('email', $request->email)->first();
 
@@ -29,7 +29,7 @@ class AuthorService
         ];
     }
 
-    public function logout(Request $request)
+    public static function logout(Request $request): array
     {
         $request->user()->currentAccessToken()->delete();
 

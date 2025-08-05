@@ -11,7 +11,7 @@ class GenreService
     public static function index(Request $request)
     {
         $genres = Genre::withCount('books')
-            ->paginate($request->input('per_page', 15));
+            ->paginate();
 
         if ($genres->isEmpty()) {
             abort(404);
@@ -39,6 +39,6 @@ class GenreService
     public static function destroy(Genre $genre)
     {
         $genre->delete();
-        return ['message' => 'Genre deleted'];
+        return ['message' => "Genre {$genre->name} (ID: {$genre->id}) deleted"];
     }
 }
