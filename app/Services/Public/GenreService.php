@@ -4,9 +4,10 @@ namespace App\Services\Public;
 
 use App\Models\Book;
 use App\Models\Genre;
+use App\Services\Service;
 use Illuminate\Http\Request;
 
-class GenreService
+class GenreService extends Service
 {
     public static function index(Request $request): \Illuminate\Pagination\LengthAwarePaginator
     {

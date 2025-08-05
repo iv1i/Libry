@@ -3,10 +3,11 @@
 namespace App\Services\Admin;
 
 use App\Models\Genre;
+use App\Services\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class GenreService
+class GenreService extends Service
 {
     public static function index(Request $request)
     {

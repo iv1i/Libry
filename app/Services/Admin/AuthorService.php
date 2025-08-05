@@ -5,10 +5,11 @@ namespace App\Services\Admin;
 use App\Http\Requests\Admin\AdminAuthorStoreRequest;
 use App\Http\Requests\Admin\AdminAuthorUpdateRequest;
 use App\Models\Author;
+use App\Services\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AuthorService
+class AuthorService extends Service
 {
     public static function index(Request $request): Author
     {

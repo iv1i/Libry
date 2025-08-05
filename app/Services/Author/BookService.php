@@ -3,31 +3,15 @@
 namespace App\Services\Author;
 
 use App\Http\Requests\Author\AuthorBookUpdateRequest;
+use App\Models\Author;
 use App\Models\Book;
+use App\Services\Service;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class BookService
+class BookService extends Service
 {
-    public static function index(Request $request): Book|JsonResponse
-    {
-        if (!Auth::guard('author')->check()) {
-            return response()->json([
-                'error' => 'Unauthorized action.'
-            ], 403);
-        }
-        $books = Auth::guard('author')->user()->books()
-            ->with('genres')
-            ->paginate();
-
-        if ($books->isEmpty()) {
-            abort(404);
-        }
-
-        return $books;
-    }
-
     public static function update(AuthorBookUpdateRequest $request, Book $book): Book|JsonResponse
     {
         if ($book->author_id !== Auth::guard('author')->id()) {

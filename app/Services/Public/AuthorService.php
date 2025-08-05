@@ -3,9 +3,10 @@
 namespace App\Services\Public;
 
 use App\Models\Author;
+use App\Services\Service;
 use Illuminate\Http\Request;
 
-class AuthorService
+class AuthorService extends Service
 {
     public static function index(Request $request): Author
     {

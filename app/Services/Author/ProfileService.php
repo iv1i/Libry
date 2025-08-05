@@ -4,10 +4,11 @@ namespace App\Services\Author;
 
 use App\Http\Requests\Author\AuthorProfileUpdateRequest;
 use App\Models\Author;
+use App\Services\Service;
 use Illuminate\Support\Facades\Hash;
 
 
-class ProfileService
+class ProfileService extends Service
 {
     public static function update(AuthorProfileUpdateRequest $request): Author
     {
