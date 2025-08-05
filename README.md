@@ -180,7 +180,7 @@ docker compose exec app php artisan migrate --seed
     "description": "Описание книги (необязательное поле)",
     "author": "Генри Кавил",
     "type": "printed",
-    "genres": "genre1,genre2"
+    "genres": ["genre1","genre2"]
 }
 ```
 ### Данные для создания и обновления авторов:
@@ -197,7 +197,7 @@ docker compose exec app php artisan migrate --seed
     "name": "new_genre"
 }
 ```
-### фильтрация книг у администратора:
+### фильтрация и сортировка книг:
 ```
-GET /api/admin/books?title=Harry Potter&author=Генри Кавил&genres=tale&sort=title
+/api/admin/books?title=Harry Potter&author=Генри Кавил&genres=tale&sort=title
 ```
