@@ -4,7 +4,7 @@ namespace App\Services;
 
 class Utility
 {
-    public static function makeId($q)
+    public static function makeId($q): int
     {
         $table = [];
         foreach ($q as $item) {
@@ -18,6 +18,7 @@ class Utility
             }
             $id++;
         }
+
         return $id;
     }
 }

@@ -33,6 +33,7 @@ class AdminService
     public static function logout(Request $request): array
     {
         $request->user()->currentAccessToken()->delete();
+
         return ['message' => 'Logged out successfully'];
     }
 }

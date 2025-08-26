@@ -14,13 +14,14 @@ class AuthorController extends Controller
     public function index(Request $request): AnonymousResourceCollection
     {
         $res = AuthorService::index($request);
+
         return AuthorResource::collection($res);
     }
 
     public function show(Author $author): AuthorResource
     {
         $res = AuthorService::show($author);
-        return new AuthorResource($res);
 
+        return new AuthorResource($res);
     }
 }

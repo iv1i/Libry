@@ -4,6 +4,7 @@ namespace App\Services\Admin;
 
 use App\Http\Requests\Admin\AdminAuthorStoreRequest;
 use App\Http\Requests\Admin\AdminAuthorUpdateRequest;
+use App\Http\Requests\Admin\AdminBookIndexRequest;
 use App\Models\Author;
 use App\Services\Service;
 use Illuminate\Http\Request;
@@ -11,10 +12,10 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthorService extends Service
 {
-    public static function index(Request $request): Author
+    public static function index(AdminBookIndexRequest $request): Author
     {
         $authors = Author::withCount('books')
-            ->paginate($request->input('per_page', 15));
+            ->paginate();
 
         if ($authors->isEmpty()) {
             abort(404);
@@ -49,6 +50,7 @@ class AuthorService extends Service
     public static function destroy(Author $author): array
     {
         $author->delete();
+
         return ['message' => "Author {$author->name} (ID: {$author->id}) deleted"];
     }
 }

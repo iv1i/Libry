@@ -13,33 +13,38 @@ use Illuminate\Support\Facades\Log;
 
 class GenreController extends Controller
 {
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(): AnonymousResourceCollection
     {
-        $res = GenreService::index($request);
+        $res = GenreService::index();
+
         return GenreResource::collection($res);
     }
 
     public function store(Request $request): GenreResource
     {
         $res = GenreService::store($request);
+
         return new GenreResource($res);
     }
 
     public function show(Genre $genre): GenreResource
     {
         $res = GenreService::show($genre);
+
         return new GenreResource($res);
     }
 
     public function update(Request $request, Genre $genre): GenreResource
     {
         $res = GenreService::update($request, $genre);
+
         return new GenreResource($res);
     }
 
     public function destroy(Genre $genre): JsonResponse
     {
         $res = GenreService::destroy($genre);
+
         return response()->json($res);
     }
 }

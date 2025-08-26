@@ -49,6 +49,7 @@ class BookService extends Service
     public static function destroy(Book $book): array
     {
         $book->delete();
+
         return ['message' => "Book {$book->title} (ID: {$book->id}) deleted"];
     }
 }

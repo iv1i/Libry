@@ -4,10 +4,11 @@ namespace App\Services;
 
 use App\Http\Requests\Public\BookIndexRequest;
 use App\Models\Book;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class Service
 {
-    public static function indexBook(BookIndexRequest $request): \Illuminate\Pagination\LengthAwarePaginator
+    public static function indexBook(BookIndexRequest $request): LengthAwarePaginator
     {
         $books = Book::with(['author', 'genres'])
             ->filterByTitle($request->title)

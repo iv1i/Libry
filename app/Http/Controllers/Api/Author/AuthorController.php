@@ -12,6 +12,7 @@ class AuthorController extends Controller
     public function update(AuthorProfileUpdateRequest $request): AuthorResource
     {
         $res = ProfileService::update($request);
+
         return new AuthorResource($res);
     }
 }

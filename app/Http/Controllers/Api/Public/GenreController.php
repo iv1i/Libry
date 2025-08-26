@@ -13,6 +13,7 @@ class GenreController extends Controller
     public function index(Request $request): AnonymousResourceCollection
     {
         $res = GenreService::index($request);
+
         return GenreResource::collection($res);
     }
 }

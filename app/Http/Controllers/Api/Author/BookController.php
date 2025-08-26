@@ -18,18 +18,21 @@ class BookController extends Controller
     public function index(BookIndexRequest $request): AnonymousResourceCollection
     {
         $res = Service::indexBook($request);
+
         return BookResource::collection($res);
     }
 
     public function update(AuthorBookUpdateRequest $request, Book $book): BookResource
     {
         $res = BookService::update($request, $book);
+
         return new BookResource($res);
     }
 
     public function destroy(Book $book): JsonResponse
     {
         $res = BookService::destroy($book);
+
         return response()->json($res);
     }
 }

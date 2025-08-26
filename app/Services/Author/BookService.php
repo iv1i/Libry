@@ -12,12 +12,12 @@ use Illuminate\Support\Facades\Auth;
 
 class BookService extends Service
 {
-    public static function update(AuthorBookUpdateRequest $request, Book $book): Book|JsonResponse
+    public static function update(AuthorBookUpdateRequest $request, Book $book): array|Book
     {
         if ($book->author_id !== Auth::guard('author')->id()) {
-            return response()->json([
+            return [
                 'error' => 'Unauthorized action.'
-            ], 403);
+            ];
         }
 
         $book->update($request->validated());
@@ -29,12 +29,12 @@ class BookService extends Service
         return $book->load('genres');
     }
 
-    public static function destroy(Book $book): array|JsonResponse
+    public static function destroy(Book $book): array
     {
         if ($book->author_id !== Auth::guard('author')->id()) {
-            return response()->json([
+            return [
                 'error' => 'Unauthorized action.'
-            ], 403);
+            ];
         }
 
         $book->delete();

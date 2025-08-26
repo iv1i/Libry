@@ -5,11 +5,10 @@ namespace App\Services\Admin;
 use App\Models\Genre;
 use App\Services\Service;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 class GenreService extends Service
 {
-    public static function index(Request $request)
+    public static function index(): Genre
     {
         $genres = Genre::withCount('books')
             ->paginate();
@@ -21,25 +20,28 @@ class GenreService extends Service
         return $genres;
     }
 
-    public static function store(Request $request)
+    public static function store(Request $request): Genre
     {
         $genre = Genre::create($request->validated());
+
         return $genre;
     }
 
-    public function show(Genre $genre)
+    public function show(Genre $genre): Genre
     {
         return $genre->load('books');
     }
 
-    public static function update(Request $request, Genre $genre)
+    public static function update(Request $request, Genre $genre): Genre
     {
         $genre->update($request->validated());
-        return response()->json($genre);
+
+        return $genre;
     }
-    public static function destroy(Genre $genre)
+    public static function destroy(Genre $genre): array
     {
         $genre->delete();
+
         return ['message' => "Genre {$genre->name} (ID: {$genre->id}) deleted"];
     }
 }
