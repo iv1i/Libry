@@ -12,9 +12,6 @@ Route::prefix('public')->group(function () {
     Route::get('/authors/{author}', [\App\Http\Controllers\Api\Public\AuthorController::class, 'show']);
 
     Route::get('/genres', [\App\Http\Controllers\Api\Public\GenreController::class, 'index']);
-    Route::get('/test-error', function() {
-        throw new Exception('Test exc error');
-    });
 });
 
 // Авторские маршруты

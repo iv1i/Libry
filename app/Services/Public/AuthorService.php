@@ -5,10 +5,11 @@ namespace App\Services\Public;
 use App\Models\Author;
 use App\Services\Service;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class AuthorService extends Service
 {
-    public static function index(): Author
+    public static function index(): LengthAwarePaginator
     {
         $authors = Author::withCount('books')
             ->paginate();
