@@ -21,7 +21,6 @@ services:
             - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
             - './database/schema/init.sql:/docker-entrypoint-initdb.d/dump.sql'
 
-
     laravel.test:
         build:
             context: docker/development

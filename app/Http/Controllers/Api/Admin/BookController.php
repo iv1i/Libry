@@ -22,24 +22,28 @@ class BookController extends Controller
 
         return BookResource::collection($res);
     }
+
     public function store(AdminBookStoreRequest $request): BookResource
     {
         $res = BookService::store($request);
 
         return new BookResource($res);
     }
+
     public function show(Book $book): BookResource
     {
         $res = BookService::show($book);
 
         return new BookResource($res);
     }
+
     public function update(AdminBookUpdateRequest $request, Book $book): BookResource
     {
         $res = BookService::update($request, $book);
 
         return new BookResource($res);
     }
+
     public function destroy(Book $book): JsonResponse
     {
         $res = BookService::destroy($book);

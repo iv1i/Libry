@@ -14,9 +14,12 @@ class GenreObserver
     public function created(Genre $genre): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Genre created: {$genre->title} (ID: {$genre->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Genre created: {$genre->title} (ID: {$genre->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**
@@ -25,9 +28,12 @@ class GenreObserver
     public function updated(Genre $genre): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Genre updated: {$genre->title} (ID: {$genre->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Genre updated: {$genre->title} (ID: {$genre->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**
@@ -36,9 +42,12 @@ class GenreObserver
     public function deleted(Genre $genre): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Genre deleted: {$genre->title} (ID: {$genre->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Genre deleted: {$genre->title} (ID: {$genre->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**

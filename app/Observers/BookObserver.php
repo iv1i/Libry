@@ -14,9 +14,12 @@ class BookObserver
     public function created(Book $book): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Book created: {$book->title} (ID: {$book->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Book created: {$book->title} (ID: {$book->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**
@@ -25,9 +28,12 @@ class BookObserver
     public function updated(Book $book): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Book updated: {$book->title} (ID: {$book->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Book updated: {$book->title} (ID: {$book->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**
@@ -36,9 +42,12 @@ class BookObserver
     public function deleted(Book $book): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Book deleted: {$book->title} (ID: {$book->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Book deleted: {$book->title} (ID: {$book->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**

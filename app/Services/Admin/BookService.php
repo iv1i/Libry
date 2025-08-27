@@ -17,6 +17,7 @@ class BookService extends Service
     {
         return $book->load('author', 'genres');
     }
+
     public static function store(AdminBookStoreRequest $request): Book
     {
         $bookId = Utility::makeId(Book::all());
@@ -33,6 +34,7 @@ class BookService extends Service
 
         return $book->load('author', 'genres');
     }
+
     public static function update(AdminBookUpdateRequest $request, Book $book): Book
     {
         $author = Author::where('name', $request->author)->first();
@@ -46,6 +48,7 @@ class BookService extends Service
 
         return $book->load('author', 'genres');
     }
+
     public static function destroy(Book $book): array
     {
         $book->delete();

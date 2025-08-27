@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class AuthorService extends Service
 {
-    public static function index(Request $request): Author
+    public static function index(): Author
     {
         $authors = Author::withCount('books')
             ->paginate();

@@ -10,9 +10,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class GenreController extends Controller
 {
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(): AnonymousResourceCollection
     {
-        $res = GenreService::index($request);
+        $res = GenreService::index();
 
         return GenreResource::collection($res);
     }

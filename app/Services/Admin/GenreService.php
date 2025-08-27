@@ -38,6 +38,7 @@ class GenreService extends Service
 
         return $genre;
     }
+
     public static function destroy(Genre $genre): array
     {
         $genre->delete();

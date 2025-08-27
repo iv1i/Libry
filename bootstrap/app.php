@@ -41,6 +41,6 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (QueryException $e, Request $request) {
             return response()->json([
                 'error' => 'Table not found.'
-            ], 404);
+            ], 503);
         });
     })->create();

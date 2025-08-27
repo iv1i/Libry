@@ -14,9 +14,12 @@ class AuthorObserver
     public function created(Author $author): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Author created: {$author->name} (ID: {$author->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Author created: {$author->name} (ID: {$author->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**
@@ -25,9 +28,12 @@ class AuthorObserver
     public function updated(Author $author): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Author updated: {$author->name} (ID: {$author->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Author updated: {$author->name} (ID: {$author->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**
@@ -36,9 +42,12 @@ class AuthorObserver
     public function deleted(Author $author): void
     {
         $authUser = Auth::user();
-        Log::channel('library')->info(
-            "Author deleted: {$author->name} (ID: {$author->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
-        );
+
+        if ($authUser){
+            Log::channel('library')->info(
+                "Author deleted: {$author->name} (ID: {$author->id}) | By User: {$authUser->name} (ID: {$authUser->id})"
+            );
+        }
     }
 
     /**

@@ -10,7 +10,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 
 class GenreService extends Service
 {
-    public static function index(Request $request): LengthAwarePaginator
+    public static function index(): LengthAwarePaginator
     {
         $genres = Genre::withCount('books')
             ->paginate();

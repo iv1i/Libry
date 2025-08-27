@@ -11,9 +11,9 @@ use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class AuthorController extends Controller
 {
-    public function index(Request $request): AnonymousResourceCollection
+    public function index(): AnonymousResourceCollection
     {
-        $res = AuthorService::index($request);
+        $res = AuthorService::index();
 
         return AuthorResource::collection($res);
     }
